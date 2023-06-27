@@ -1,10 +1,13 @@
 -- 1978. Employees Whose Manager Left the Company
--- Easy
--- 105
--- 17
--- Companies
 -- SQL Schema
-
+-- Create table If Not Exists Employees (employee_id int, name varchar(20), manager_id int, salary int)
+-- Truncate table Employees
+-- insert into Employees (employee_id, name, manager_id, salary) values ('3', 'Mila', '9', '60301')
+-- insert into Employees (employee_id, name, manager_id, salary) values ('12', 'Antonella', 'None', '31000')
+-- insert into Employees (employee_id, name, manager_id, salary) values ('13', 'Emery', 'None', '67084')
+-- insert into Employees (employee_id, name, manager_id, salary) values ('1', 'Kalel', '11', '21241')
+-- insert into Employees (employee_id, name, manager_id, salary) values ('9', 'Mikaela', 'None', '50937')
+-- insert into Employees (employee_id, name, manager_id, salary) values ('11', 'Joziah', '6', '28485')
 -- Table: Employees
 
 -- +-------------+----------+
@@ -54,3 +57,11 @@
 -- Kalel's manager is employee 11, who is still in the company (Joziah).
 -- Joziah's manager is employee 6, who left the company because there is no row for employee 6 as it was deleted.
 
+# Write your MySQL query statement below
+with cte as (
+    select employee_id ,  salary 
+    from employees
+    where salary < 30000
+    and manager_id not in (select employee_id  from employees)
+)
+select employee_id from cte
