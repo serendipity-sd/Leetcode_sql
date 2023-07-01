@@ -64,4 +64,4 @@ with cte as (
     where salary < 30000
     and manager_id not in (select employee_id  from employees)
 )
-select employee_id from cte
+select employee_id from cte order by employee_id
